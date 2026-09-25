@@ -1,0 +1,98 @@
+{% extends "layouts/base.html" %}
+{% block title %}Permissions Management{% endblock %}
+{% block page_title %}Permissions Management{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1>Permissions Registry</h1>
+        <p class="page-subtitle">System capabilities that can be bundled into roles.</p>
+    </div>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createPermissionModal">
+        <i class="bi bi-plus-lg"></i> Add Permission
+    </button>
+</div>
+
+<div class="table-card">
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Module</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for perm in permissions %}
+                <tr>
+                    <td><code>{{ perm.code }}</code></td>
+                    <td class="fw-bold">{{ perm.name }}</td>
+                    <td><span class="badge bg-secondary">{{ perm.module }}</span></td>
+                    <td class="text-muted small">{{ perm.description or '-' }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4">
+                        <div class="empty-state">
+                            <i class="bi bi-key"></i>
+                            No permissions registered.
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal: Create Permission -->
+<div class="modal fade" id="createPermissionModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-custom-blue text-white">
+                <h5 class="modal-title fw-bold">
+                    <i class="bi bi-key"></i> Permission Detail
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="POST" action="{{ url_for('permissions.create') }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div class="modal-body p-4">
+                    <div class="mb-3">
+                        <label class="form-label">Code</label>
+                        <input type="text" name="code" class="form-control" placeholder="e.g. user.view" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text" name="name" class="form-control" placeholder="Human-readable name" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Module</label>
+                        <select name="module" class="form-select">
+                            <option value="User Management">User Management</option>
+                            <option value="Disease Management">Disease Management</option>
+                            <option value="Diagnosis">Diagnosis</option>
+                            <option value="General" selected>General</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea name="description" class="form-control" rows="3" placeholder="What does this permission allow?"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-check-lg"></i> Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

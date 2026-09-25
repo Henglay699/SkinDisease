@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard with AI Chatbot</title>
+  
+  <!-- Link Flask Static CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <!-- Chatbot Widget -->
+  <div class="chatbot-container">
+    <button class="chatbot-toggle" onclick="toggleChat()">💬</button>
+    
+    <div class="chatbot-window" id="chatWindow">
+      <div class="chatbot-header">
+        <span>AI Assistant</span>
+        <button class="chatbot-close" onclick="toggleChat()">✕</button>
+      </div>
+      
+      <div class="chatbot-body" id="chatBody">
+        <div class="message bot">Hello! How can I help you today?</div>
+      </div>
+      
+      <div class="chatbot-footer">
+        <input type="text" id="userInput" placeholder="Ask a question..." onkeydown="handleKeyPress(event)" />
+        <button id="sendBtn" onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Link Flask Static JavaScript (using renamed script.js) -->
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Skin Disease Diagnosis{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+    
+    <div class="d-flex app-shell">
+
+        <aside class="sidebar d-none d-md-flex flex-column">
+            <div class="sidebar-brand">
+                <div class="sidebar-brand-icon"><i class="bi bi-clipboard2-pulse"></i></div>
+                <div class="sidebar-brand-text">
+                    Skin Disease
+                    <small>Diagnosis Platform</small>
+                </div>
+            </div>
+
+            {% if current_user.is_authenticated %}
+                <div class="sidebar-user">
+                    <div class="sidebar-user-avatar">
+                        <img src="{% if current_user.picture %}{{ url_for('static', filename='uploads/' ~ current_user.picture) }}{% else %}{{ url_for('static', filename='images/8358770.png') }}{% endif %}" alt="Profile picture">
+                    </div>
+                    <div>
+                        <div class="sidebar-user-name">{{ current_user.username }}</div>
+                        {% if current_user.roles %}
+                            <div class="sidebar-user-role">{{ current_user.roles[0].name }}</div>
+                        {% elif current_user.role %}
+                            <div class="sidebar-user-role">{{ current_user.role.name if current_user.role.name is defined else current_user.role }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                {# Safely extract all role names into a single list string #}
+                {% if current_user.roles %}
+                    {% set role_list = current_user.roles | map(attribute='name') | map('lower') | list %}
+                {% elif current_user.role %}
+                    {% set role_list = [current_user.role.name | lower] if current_user.role.name is defined else [current_user.role | lower] %}
+                {% else %}
+                    {% set role_list = [] %}
+                {% endif %}
+
+                {% set is_admin_user = (current_user.is_admin is defined and current_user.is_admin) or ('admin' in role_list) %}
+                {% set is_dermatologist_user = 'dermatologist' in role_list %}
+
+                <!-- 1. USER MANAGEMENT: Admin Only -->
+                {% if is_admin_user %}
+                    <div class="sidebar-section">
+                        <div class="sidebar-section-title">User Management</div>
+                        <nav class="sidebar-nav">
+                            <a href="{{ url_for('users.index') }}" class="sidebar-link {% if request.blueprint == 'users' %}active{% endif %}">
+                                <i class="bi bi-people"></i> Users
+                            </a>
+                            <a href="{{ url_for('roles.index') }}" class="sidebar-link {% if request.blueprint == 'roles' %}active{% endif %}">
+                                <i class="bi bi-shield-check"></i> Roles
+                            </a>
+                            <a href="{{ url_for('permissions.index') }}" class="sidebar-link {% if request.blueprint == 'permissions' %}active{% endif %}">
+                                <i class="bi bi-key"></i> Permissions
+                            </a>
+                        </nav>
+                    </div>
+                {% endif %}
+
+                <!-- 2. DISEASE MANAGEMENT: Dermatologist & Admin -->
+                {% if is_admin_user or is_dermatologist_user %}
+                    <div class="sidebar-section">
+                        <div class="sidebar-section-title">Disease Management</div>
+                        <nav class="sidebar-nav">
+                            <a href="{{ url_for('rules.index') }}" class="sidebar-link {% if request.blueprint == 'rules' %}active{% endif %}">
+                                <i class="bi bi-virus"></i> Diseases
+                            </a>
+                            <a href="{{ url_for('facts.index') }}" class="sidebar-link {% if request.blueprint == 'facts' %}active{% endif %}">
+                                <i class="bi bi-list-check"></i> Symptoms
+                            </a>
+                        </nav>
+                    </div>
+                {% endif %}
+
+                <!-- 3. FEATURES: All Logged-in Users -->
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">Features</div>
+                    <nav class="sidebar-nav">
+                        <a href="{{ url_for('diagnoses.dashboard') }}" class="sidebar-link {% if request.endpoint == 'diagnoses.dashboard' %}active{% endif %}">
+                            <i class="bi bi-journal-medical"></i> Diseases Library
+                        </a>
+                        <a href="{{ url_for('diagnoses.diagnose') }}" class="sidebar-link {% if request.endpoint == 'diagnoses.diagnose' %}active{% endif %}">
+                            <i class="bi bi-clipboard2-pulse"></i> Start Diagnosis
+                        </a>
+                        <a href="{{ url_for('diagnoses.diagnose_history') }}" class="sidebar-link {% if request.endpoint == 'diagnoses.diagnose_history' %}active{% endif %}">
+                            <i class="bi bi-clock-history"></i> History
+                        </a>
+                    </nav>
+                </div>
+
+            {% endif %}
+        </aside>
+
+         <!-- Floating AI Chatbot Widget -->
+    <div class="chatbot-container">
+        <button class="chatbot-toggle" onclick="toggleChat()"><i class="bi bi-chat-dots-fill"></i></button>
+        
+        <div class="chatbot-window" id="chatWindow">
+            <div class="chatbot-header">
+                <span>AI Assistant</span>
+                <button class="chatbot-close" onclick="toggleChat()">✕</button>
+            </div>
+            
+            <div class="chatbot-body" id="chatBody">
+                <div class="message bot">Hello! How can I help you today?</div>
+            </div>
+            
+            <div class="chatbot-footer">
+                <input type="text" id="userInput" placeholder="Ask a question..." onkeydown="handleKeyPress(event)" />
+                <button id="sendBtn" onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+
+        <div class="flex-grow-1 main-content">
+            <nav class="topbar">
+                <h1 class="topbar-title d-md-none">Skin Disease Diagnosis</h1>
+                <h1 class="topbar-title d-none d-md-block">{% block page_title %}{% endblock %}</h1>
+
+                <div class="topbar-actions">
+                    {% if current_user.is_authenticated %}
+                        <a href="{{ url_for('auth.logout') }}" class="topbar-link">
+                            <i class="bi bi-box-arrow-right"></i> Logout
+                        </a>
+                    {% else %}
+                        <a href="{{ url_for('auth.login') }}" class="topbar-link">
+                            <i class="bi bi-box-arrow-in-right"></i> Login
+                        </a>
+                    {% endif %}
+                </div>
+            </nav>
+
+            <main class="page-body">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }} alert-dismissible fade show d-flex align-items-center gap-2" role="alert">
+                                <i class="bi bi-info-circle"></i>
+                                <div>{{ message }}</div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                {% block content %}{% endblock %}
+            </main>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/srcipt.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

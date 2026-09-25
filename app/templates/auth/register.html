@@ -1,0 +1,146 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Sign Up{% endblock %}
+{% block page_title %}Create Account{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+    <div class="card auth-card auth-card-wide border-0">
+
+        <div class="auth-card-header">
+            <div class="auth-icon"><i class="bi bi-person-plus"></i></div>
+            <h3>Register your new account</h3>
+            <p>Join the Skin Disease Diagnosis platform</p>
+        </div>
+
+        <div class="auth-card-body">
+            <form action="{{ url_for('auth.register') }}" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                <div class="row align-items-start">
+
+                    <div class="col-md-4 text-center mb-4">
+                        <label for="photo-upload" class="photo-placeholder" style="cursor: pointer; width:110px; height:110px;">
+                            <svg id="placeholder-svg" xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="#97a0b3"
+                                class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                            </svg>
+                        </label>
+                        <input type="file" id="photo-upload" name="picture" accept="image/*" class="d-none" onchange="previewImage(event)">
+
+                        <div class="mt-2">
+                            <label for="photo-upload" class="form-label-sm mb-0" style="cursor: pointer;">
+                                <i class="bi bi-camera"></i> Upload photo
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="mb-3">
+                            <label for="full_name" class="form-label">Full name</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="full_name"
+                                name="full_name"
+                                placeholder="Enter your full name"
+                                value="{{ full_name or '' }}"
+                                required
+                            >
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="phone_number" class="form-label">Phone number</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="phone_number"
+                                name="phone_number"
+                                placeholder="Enter your phone number"
+                                value="{{ phone_number or '' }}"
+                                required
+                            >
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="username"
+                                name="username"
+                                placeholder="Enter your username"
+                                value="{{ username or '' }}"
+                                required
+                            >
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input
+                                type="email"
+                                class="form-control"
+                                id="email"
+                                name="email"
+                                placeholder="Enter your email"
+                                value="{{ email or '' }}"
+                                required
+                            >
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input
+                                    type="password"
+                                    class="form-control"
+                                    id="password"
+                                    name="password"
+                                    placeholder="Enter your password"
+                                    required
+                                >
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="confirm_password" class="form-label">Confirm password</label>
+                                <input
+                                    type="password"
+                                    class="form-control"
+                                    id="confirm_password"
+                                    name="confirm_password"
+                                    placeholder="Confirm your password"
+                                    required
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center gap-3 mt-3 pt-3 border-top">
+                    <a href="{{ url_for('auth.login') }}" class="btn-link text-decoration-none">
+                        Already have an account? <strong>Sign in</strong>
+                    </a>
+                    <button type="submit" class="btn btn-primary px-4 btn-glow">
+                        <i class="bi bi-person-check"></i> Sign Up
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function previewImage(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const placeholder = document.querySelector('.photo-placeholder');
+            placeholder.innerHTML = `<img src="${e.target.result}" class="preview-img" alt="Preview">`;
+        };
+        reader.readAsDataURL(file);
+    }
+}
+</script>
+
+{% endblock %}

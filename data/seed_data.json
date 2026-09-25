@@ -1,0 +1,425 @@
+{
+  "symptoms": [
+    {
+      "symptom": "Redness (Erythema)",
+      "description": "Skin appears red or flushed."
+    },
+    {
+      "symptom": "Itching (Pruritus)",
+      "description": "Irritating sensation causing a desire to scratch."
+    },
+    {
+      "symptom": "Scaling or Flaking",
+      "description": "Peeling, flaking, or shed skin cells."
+    },
+    {
+      "symptom": "Blisters (Vesicles)",
+      "description": "Fluid-filled bumps on the skin surface."
+    },
+    {
+      "symptom": "Dry Skin (Xerosis)",
+      "description": "Skin feels rough, tight, or cracked."
+    },
+    {
+      "symptom": "Pustules",
+      "description": "Small pus-filled bumps on skin or near hair follicles."
+    },
+    {
+      "symptom": "Plaques (Thickened Skin)",
+      "description": "Raised, thick patches of skin often covered with silvery scales."
+    },
+    {
+      "symptom": "Honey-Colored Crusts",
+      "description": "Golden or yellowish dried crusts formed over oozing sores."
+    },
+    {
+      "symptom": "Burning or Stinging",
+      "description": "Painful, hot, or prickling sensation on affected skin."
+    },
+    {
+      "symptom": "Swelling (Edema)",
+      "description": "Puffiness or fluid retention in skin tissues."
+    },
+    {
+      "symptom": "Depigmentation (Hypopigmentation)",
+      "description": "Loss of normal skin color resulting in white patches."
+    },
+    {
+      "symptom": "Painful Ulcers/Sores",
+      "description": "Open skin lesions causing localized pain."
+    },
+    {
+      "symptom": "Comedones (Blackheads/Whiteheads)",
+      "description": "Clogged skin pores filled with oil and dead skin cell debris."
+    },
+    {
+      "symptom": "Facial Flushing",
+      "description": "Persistent central facial redness or visible tiny blood vessels."
+    },
+    {
+      "symptom": "Ring-Shaped (Annular) Rash",
+      "description": "Circular red patch with a clearer center and raised border."
+    },
+    {
+      "symptom": "Nodule/Cyst Formation",
+      "description": "Deep, firm, or fluid-filled lumps underneath the skin surface."
+    },
+    {
+      "symptom": "Dermatomal Pain",
+      "description": "Sharp, localized neuralgic pain following a specific skin nerve pathway."
+    },
+    {
+      "symptom": "Wheals (Hives)",
+      "description": "Raised, red or skin-colored welts that appear and fade rapidly."
+    },
+    {
+      "symptom": "Skin Crease Burrows",
+      "description": "Tiny, grey-white raised lines in skin folds or between fingers."
+    },
+    {
+      "symptom": "Hyperpigmented Patches",
+      "description": "Darkened areas of skin caused by increased melanin production."
+    },
+    {
+      "symptom": "Butterfly Facial Rash",
+      "description": "Redness extending across the bridge of the nose and cheeks."
+    },
+    {
+      "symptom": "Purpura or Petechiae",
+      "description": "Non-blanching red, purple, or brown spots caused by capillary bleeding."
+    },
+    {
+      "symptom": "Foul-Smelling Drainage",
+      "description": "Thick purulent fluid or pus discharging from an infected area."
+    },
+    {
+      "symptom": "Warmth to Touch",
+      "description": "Skin feels noticeably hot due to localized inflammation or infection."
+    }
+  ],
+  "diseases": [
+    {
+      "disease": "Atopic Dermatitis (Eczema)",
+      "name": "Eczema",
+      "urgency": false,
+      "advice": "Keep skin moisturized daily. Avoid harsh soaps and known triggers.",
+      "description": "A chronic condition causing dry, red, itchy skin patches.",
+      "weights": {
+        "Itching (Pruritus)": 0.85,
+        "Redness (Erythema)": 0.75,
+        "Dry Skin (Xerosis)": 0.80,
+        "Scaling or Flaking": 0.60
+      }
+    },
+    {
+      "disease": "Contact Dermatitis",
+      "name": "Allergic Contact Rash",
+      "urgency": false,
+      "advice": "Identify and eliminate contact with foreign allergic substances. Apply cool compresses.",
+      "description": "Skin reaction resulting from direct exposure to allergens or irritants.",
+      "weights": {
+        "Redness (Erythema)": 0.80,
+        "Blisters (Vesicles)": 0.75,
+        "Itching (Pruritus)": 0.85,
+        "Burning or Stinging": 0.65,
+        "Swelling (Edema)": 0.50
+      }
+    },
+    {
+      "disease": "Psoriasis",
+      "name": "Plaque Psoriasis",
+      "urgency": false,
+      "advice": "Apply prescribed topical ointments, practice gentle skincare, and consult a dermatologist.",
+      "description": "An autoimmune condition causing rapid skin cell buildup, leading to thick, scaly patches.",
+      "weights": {
+        "Plaques (Thickened Skin)": 0.90,
+        "Scaling or Flaking": 0.85,
+        "Redness (Erythema)": 0.70,
+        "Dry Skin (Xerosis)": 0.65,
+        "Itching (Pruritus)": 0.50
+      }
+    },
+    {
+      "disease": "Folliculitis",
+      "name": "Hair Follicle Infection",
+      "urgency": false,
+      "advice": "Clean the area gently with antibacterial soap and avoid tight clothing or shaving affected areas.",
+      "description": "Inflammation or mild infection of one or more hair follicles.",
+      "weights": {
+        "Pustules": 0.85,
+        "Redness (Erythema)": 0.70,
+        "Itching (Pruritus)": 0.55,
+        "Burning or Stinging": 0.45
+      }
+    },
+    {
+      "disease": "Impetigo",
+      "name": "Contagious Bacterial Skin Infection",
+      "urgency": true,
+      "advice": "Consult a healthcare professional for topical or oral antibiotics. Avoid sharing towels.",
+      "description": "A highly contagious bacterial skin infection common in young children and infants.",
+      "weights": {
+        "Honey-Colored Crusts": 0.95,
+        "Blisters (Vesicles)": 0.80,
+        "Redness (Erythema)": 0.65,
+        "Itching (Pruritus)": 0.50
+      }
+    },
+    {
+      "disease": "Acne Vulgaris",
+      "name": "Acne",
+      "urgency": false,
+      "advice": "Wash gently twice daily with mild cleanser. Use non-comedogenic skincare products.",
+      "description": "Involvement of oil glands and hair follicles causing pimples and blocked pores.",
+      "weights": {
+        "Comedones (Blackheads/Whiteheads)": 0.95,
+        "Pustules": 0.85,
+        "Nodule/Cyst Formation": 0.70,
+        "Redness (Erythema)": 0.60
+      }
+    },
+    {
+      "disease": "Rosacea",
+      "name": "Rosacea",
+      "urgency": false,
+      "advice": "Avoid triggers such as hot drinks, spicy food, alcohol, and sun exposure.",
+      "description": "A chronic inflammatory skin condition causing central facial redness and bumps.",
+      "weights": {
+        "Facial Flushing": 0.90,
+        "Redness (Erythema)": 0.85,
+        "Pustules": 0.65,
+        "Burning or Stinging": 0.60
+      }
+    },
+    {
+      "disease": "Tinea Corporis",
+      "name": "Ringworm",
+      "urgency": false,
+      "advice": "Apply topical antifungal cream twice daily. Keep skin dry and avoid sharing personal items.",
+      "description": "A fungal infection causing a circular rash with clearer center skin.",
+      "weights": {
+        "Ring-Shaped (Annular) Rash": 0.95,
+        "Itching (Pruritus)": 0.80,
+        "Scaling or Flaking": 0.75,
+        "Redness (Erythema)": 0.65
+      }
+    },
+    {
+      "disease": "Seborrheic Dermatitis",
+      "name": "Dandruff / Seborrheic Eczema",
+      "urgency": false,
+      "advice": "Use medicated antifungal or anti-dandruff shampoos containing zinc pyrithione or ketoconazole.",
+      "description": "An inflammatory skin condition affecting oily areas like scalp, face, and chest.",
+      "weights": {
+        "Scaling or Flaking": 0.90,
+        "Redness (Erythema)": 0.75,
+        "Itching (Pruritus)": 0.70,
+        "Dry Skin (Xerosis)": 0.50
+      }
+    },
+    {
+      "disease": "Herpes Zoster",
+      "name": "Shingles",
+      "urgency": true,
+      "advice": "Seek immediate medical evaluation for antiviral therapy within 72 hours of outbreak.",
+      "description": "Reactivation of the varicella-zoster virus causing a painful, blistering rash along nerve paths.",
+      "weights": {
+        "Dermatomal Pain": 0.95,
+        "Blisters (Vesicles)": 0.90,
+        "Burning or Stinging": 0.85,
+        "Redness (Erythema)": 0.70
+      }
+    },
+    {
+      "disease": "Urticaria",
+      "name": "Hives",
+      "urgency": false,
+      "advice": "Take oral antihistamines and avoid overheating or exposure to triggering substances.",
+      "description": "Vascular skin reaction characterized by itchy, transient welts or wheals.",
+      "weights": {
+        "Wheals (Hives)": 0.95,
+        "Itching (Pruritus)": 0.90,
+        "Swelling (Edema)": 0.75,
+        "Redness (Erythema)": 0.70
+      }
+    },
+    {
+      "disease": "Scabies",
+      "name": "Scabies Infestation",
+      "urgency": true,
+      "advice": "Consult a physician for prescription permethrin cream. Wash clothing and bedding in hot water.",
+      "description": "Contagious skin infestation by microscopic mites causing severe nocturnal itching.",
+      "weights": {
+        "Itching (Pruritus)": 0.95,
+        "Skin Crease Burrows": 0.90,
+        "Redness (Erythema)": 0.65,
+        "Pustules": 0.50
+      }
+    },
+    {
+      "disease": "Cellulitis",
+      "name": "Bacterial Cellulitis",
+      "urgency": true,
+      "advice": "Seek urgent medical evaluation for oral or intravenous antibiotic treatment.",
+      "description": "A serious, deep bacterial skin and soft tissue infection requiring rapid medical care.",
+      "weights": {
+        "Warmth to Touch": 0.90,
+        "Redness (Erythema)": 0.90,
+        "Swelling (Edema)": 0.85,
+        "Painful Ulcers/Sores": 0.60
+      }
+    },
+    {
+      "disease": "Vitiligo",
+      "name": "Vitiligo",
+      "urgency": false,
+      "advice": "Protect depigmented skin with broad-spectrum sunscreen. Consult a dermatologist for phototherapy.",
+      "description": "An autoimmune condition causing progressive loss of pigment patches on the skin.",
+      "weights": {
+        "Depigmentation (Hypopigmentation)": 0.95,
+        "Dry Skin (Xerosis)": 0.20
+      }
+    },
+    {
+      "disease": "Melasma",
+      "name": "Chloasma / Hyperpigmentation",
+      "urgency": false,
+      "advice": "Apply high SPF sunscreen daily and minimize direct sun and heat exposure.",
+      "description": "Skin condition causing dark, discolored symmetrical patches on sun-exposed facial areas.",
+      "weights": {
+        "Hyperpigmented Patches": 0.95,
+        "Facial Flushing": 0.30
+      }
+    },
+    {
+      "disease": "Systemic Lupus Erythematosus (Cutaneous Manifestation)",
+      "name": "Lupus Rash",
+      "urgency": true,
+      "advice": "Consult a rheumatologist or dermatologist for systemic evaluation and light protection.",
+      "description": "An autoimmune disorder causing a characteristic malar rash triggered by sun light.",
+      "weights": {
+        "Butterfly Facial Rash": 0.95,
+        "Redness (Erythema)": 0.80,
+        "Burning or Stinging": 0.50,
+        "Scaling or Flaking": 0.40
+      }
+    },
+    {
+      "disease": "Pityriasis Rosea",
+      "name": "Pityriasis Rosea",
+      "urgency": false,
+      "advice": "Use mild emollients and anti-itch medications; rash usually resolves spontaneously in 6-8 weeks.",
+      "description": "A benign, self-limiting skin rash starting with a single herald patch followed by oval lesions.",
+      "weights": {
+        "Scaling or Flaking": 0.85,
+        "Redness (Erythema)": 0.80,
+        "Itching (Pruritus)": 0.65,
+        "Ring-Shaped (Annular) Rash": 0.60
+      }
+    },
+    {
+      "disease": "Hidradenitis Suppurativa",
+      "name": "Acne Inversa",
+      "urgency": true,
+      "advice": "Maintain warm compresses, avoid tight clothing, and consult a dermatologist for anti-inflammatory care.",
+      "description": "A chronic inflammatory condition causing painful nodules and abscesses in body folds.",
+      "weights": {
+        "Nodule/Cyst Formation": 0.90,
+        "Foul-Smelling Drainage": 0.85,
+        "Painful Ulcers/Sores": 0.80,
+        "Redness (Erythema)": 0.60
+      }
+    },
+    {
+      "disease": "Tinea Versicolor",
+      "name": "Pityriasis Versicolor",
+      "urgency": false,
+      "advice": "Apply topical antifungal cleansers or lotions containing selenium sulfide.",
+      "description": "A common superficial fungal infection leading to discolored, fine-scaling patches.",
+      "weights": {
+        "Depigmentation (Hypopigmentation)": 0.80,
+        "Hyperpigmented Patches": 0.80,
+        "Scaling or Flaking": 0.75,
+        "Itching (Pruritus)": 0.30
+      }
+    },
+    {
+      "disease": "Actinic Keratosis",
+      "name": "Solar Keratosis",
+      "urgency": true,
+      "advice": "Schedule an examination with a dermatologist due to potential precancerous risk.",
+      "description": "A rough, scaly patch on sun-damaged skin that may progress to squamous cell carcinoma.",
+      "weights": {
+        "Scaling or Flaking": 0.85,
+        "Dry Skin (Xerosis)": 0.70,
+        "Plaques (Thickened Skin)": 0.65,
+        "Burning or Stinging": 0.40
+      }
+    },
+    {
+      "disease": "Dyshidrotic Eczema",
+      "name": "Pompholyx",
+      "urgency": false,
+      "advice": "Apply thick moisturizing ointments and cool compresses; avoid frequent hand washing.",
+      "description": "A specific type of eczema causing intensely itchy, tiny blisters on palms, soles, and fingers.",
+      "weights": {
+        "Blisters (Vesicles)": 0.90,
+        "Itching (Pruritus)": 0.85,
+        "Scaling or Flaking": 0.70,
+        "Dry Skin (Xerosis)": 0.65
+      }
+    },
+    {
+      "disease": "Vasculitis (Cutaneous)",
+      "name": "Cutaneous Vasculitis",
+      "urgency": true,
+      "advice": "Requires prompt clinical evaluation to determine underlying cause and organ involvement.",
+      "description": "Inflammation of skin blood vessels resulting in spotty discoloration and purpuric lesions.",
+      "weights": {
+        "Purpura or Petechiae": 0.95,
+        "Redness (Erythema)": 0.75,
+        "Painful Ulcers/Sores": 0.65,
+        "Swelling (Edema)": 0.50
+      }
+    },
+    {
+      "disease": "Abscess / Furuncle",
+      "name": "Skin Boils",
+      "urgency": true,
+      "advice": "Apply warm compresses; do not squeeze or puncture. Seek professional drainage if painful.",
+      "description": "A localized collection of pus within tissues caused by bacterial infection.",
+      "weights": {
+        "Nodule/Cyst Formation": 0.85,
+        "Pustules": 0.80,
+        "Warmth to Touch": 0.75,
+        "Foul-Smelling Drainage": 0.70,
+        "Redness (Erythema)": 0.65
+      }
+    },
+    {
+      "disease": "Molluscum Contagiosum",
+      "name": "Molluscum",
+      "urgency": false,
+      "advice": "Avoid scratching lesions to prevent spreading. Consult a doctor for options if persistent.",
+      "description": "A viral skin infection causing small, firm, firm dome-shaped bumps with central dimples.",
+      "weights": {
+        "Nodule/Cyst Formation": 0.75,
+        "Itching (Pruritus)": 0.40,
+        "Redness (Erythema)": 0.35
+      }
+    },
+    {
+      "disease": "Erythema Nodosum",
+      "name": "Erythema Nodosum",
+      "urgency": true,
+      "advice": "Elevate legs and rest. Consult a healthcare provider to investigate underlying causes.",
+      "description": "An inflammatory disorder producing tender, red nodules typically located on the shins.",
+      "weights": {
+        "Nodule/Cyst Formation": 0.85,
+        "Redness (Erythema)": 0.80,
+        "Warmth to Touch": 0.70,
+        "Swelling (Edema)": 0.65
+      }
+    }
+  ]
+}

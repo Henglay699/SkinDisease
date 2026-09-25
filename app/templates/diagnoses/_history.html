@@ -1,0 +1,67 @@
+{% extends "layouts/base.html" %}
+{% block title %}Diagnosis History{% endblock %}
+{% block page_title %}Diagnosis History{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1>Your Diagnosis History</h1>
+        <p class="page-subtitle">Past assessments and their outcomes.</p>
+    </div>
+</div>
+
+{% if diagnoses %}
+<div class="table-card">
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Disease</th>
+                    <th>Certainty</th>
+                    <th>Date</th>
+                    <th class="text-end" style="width:100px">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in diagnoses %}
+                <tr>
+                    <td>{{ d.id }}</td>
+                    <td>
+                        {% if d.rules %}
+                            {% for r in d.rules %}
+                                {{ r.name }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            Unknown
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if d.certainty %}
+                            <span class="badge bg-info">
+                                {{ d.certainty|round(0) }}%
+                            </span>
+                        {% else %}
+                            <span class="text-muted">N/A</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ d.diagnosed_at.strftime("%Y-%m-%d %H:%M") if d.diagnosed_at else "N/A" }}</td>
+                    <td class="text-end">
+                        <a href="{{ url_for('diagnoses.diagnose_result', diagnose_id=d.id) }}"
+                           class="btn btn-sm btn-primary">
+                            <i class="bi bi-eye"></i> View
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% else %}
+    <div class="empty-state">
+        <i class="bi bi-clock-history"></i>
+        You have no past diagnoses.
+    </div>
+{% endif %}
+{% endblock %}

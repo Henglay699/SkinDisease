@@ -1,0 +1,35 @@
+<div class="panel-card">
+
+    <div class="panel-card-header text-center">
+        <h4 class="card-header-title">Symptom Detail</h4>
+    </div>
+
+    <div class="panel-card-body">
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <div class="mb-3">
+                {{ form.symptom.label(class="form-label-sm") }}
+                {{ form.symptom(class="form-control form-control-custom", placeholder="e.g. Redness") }}
+                {% for error in form.symptom.errors %}
+                    <div class="text-danger small mt-1">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.description.label(class="form-label-sm") }}
+                {{ form.description(class="form-control form-control-custom", rows="3", placeholder="Describe the symptom in detail") }}
+                {% for error in form.description.errors %}
+                    <div class="text-danger small mt-1">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="d-flex justify-content-end align-items-center gap-2 mt-4 pt-3 border-top">
+                <a href="{{ url_for('facts.index') }}" class="btn btn-secondary">
+                    Cancel
+                </a>
+                {{ form.submit(class="btn btn-primary btn-glow") }}
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+{% extends "layouts/base.html" %}
+{% block title %}Edit Role{% endblock %}
+{% block page_title %}Edit Role{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 col-xl-7 mx-auto">
+        <div class="page-header">
+            <div>
+                <h1>Edit Role: {{ role.name }}</h1>
+                <p class="page-subtitle">Update the role name, description, and permissions.</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body p-4">
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+                    {% include "roles/_form.html" %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Login{% endblock %}
+{% block page_title %}Sign In{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+    <div class="card auth-card border-0">
+
+        <div class="auth-card-header">
+            <div class="auth-icon"><i class="bi bi-clipboard2-pulse"></i></div>
+            <h2>Welcome back</h2>
+            <p>Sign in to continue to Skin Disease Diagnosis</p>
+        </div>
+
+        <div class="auth-card-body">
+            <form method="POST" action="{{ url_for('auth.login') }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input
+                        type="text"
+                        class="form-control form-control-lg"
+                        id="username"
+                        name="username"
+                        placeholder="Enter your username"
+                        required
+                        autofocus
+                    >
+                </div>
+
+                <div class="mb-4">
+                    <label for="password" class="form-label">Password</label>
+                    <input
+                        type="password"
+                        class="form-control form-control-lg"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 py-2 fs-6 justify-content-center btn-glow">
+                    <i class="bi bi-box-arrow-in-right"></i> Login
+                </button>
+
+                <div class="text-center mt-4">
+                    <a href="{{ url_for('auth.register') }}" class="btn-link text-decoration-none">
+                        Don't have an account? <strong>Sign up</strong>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

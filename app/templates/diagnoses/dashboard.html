@@ -1,0 +1,66 @@
+{% extends "layouts/base.html" %}
+{% block title %}Diseases Library{% endblock %}
+{% block page_title %}Diseases Library{% endblock %}
+
+{% block content %}
+<div class="panel-card">
+
+    <div class="panel-card-header text-center">
+        <h4 class="mb-0">Diseases</h4>
+    </div>
+
+    <div class="panel-card-body">
+        <h6 class="fw-bold mb-4">
+            <i class="bi bi-journal-medical"></i> Type of Disease
+        </h6>
+
+        {% if rules %}
+        <div class="d-flex flex-column gap-3">
+            {% for rule in rules %}
+            <div class="disease-row row align-items-center g-0">
+                <div class="col-4 col-md-3">
+                    <div class="pe-3">
+                        {% if rule.picture %}
+                        <img src="{{ url_for('static', filename='diseasePic/' ~ rule.picture) }}" class="disease-thumb">
+                        {% else %}
+                        <img src="{{ url_for('static', filename='images/disease.jpg') }}" class="disease-thumb">
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="col-8 col-md-9">
+                    <div class="ps-3">
+                        <p class="fw-bold mb-2">
+                            {{ rule.name }}: {{ rule.description if rule.description else "these symptoms will appeared when ever you got the " ~ rule.name }}
+                        </p>
+
+                        <ul class="list-unstyled mb-0 ps-0 small">
+                            {% if rule.advice %}
+                                {# Split advice by new lines if it's a long string, or loop if it's a list #}
+                                {% set advice_items = rule.advice.split('\n') if rule.advice is string else rule.advice %}
+                                {% for item in advice_items %}
+                                    {% if item.strip() %}
+                                    <li class="d-flex gap-2 mb-1">
+                                        <i class="bi bi-dot"></i> <span>{{ item.strip() }}</span>
+                                    </li>
+                                    {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                <li class="text-muted fst-italic">No symptoms or advice listed.</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="bi bi-virus"></i>
+            No diseases defined yet.
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
