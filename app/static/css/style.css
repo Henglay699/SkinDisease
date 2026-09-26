@@ -60,7 +60,8 @@
 /* Base                                                                    */
 /* ---------------------------------------------------------------------- */
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -72,7 +73,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-sans);
   font-weight: 700;
   color: var(--color-text);
@@ -109,6 +115,7 @@ hr {
 }
 
 .sidebar {
+  display: flex;
   width: var(--sidebar-width);
   flex-shrink: 0;
   background: var(--color-sidebar-bg);
@@ -366,7 +373,7 @@ hr {
   margin-bottom: 1.75rem;
 }
 
-.page-header > *:last-child {
+.page-header>*:last-child {
   flex-shrink: 0;
 }
 
@@ -702,7 +709,7 @@ textarea.form-control {
   vertical-align: middle;
 }
 
-.table > thead > tr > th {
+.table>thead>tr>th {
   background: var(--color-surface-alt);
   color: var(--color-text-muted);
   font-size: 0.72rem;
@@ -714,17 +721,17 @@ textarea.form-control {
   white-space: nowrap;
 }
 
-.table > tbody > tr > td {
+.table>tbody>tr>td {
   padding: 0.85rem 1rem;
   border-bottom: 1px solid var(--color-border);
   font-size: 0.88rem;
 }
 
-.table-striped > tbody > tr:nth-of-type(odd) > td {
+.table-striped>tbody>tr:nth-of-type(odd)>td {
   background-color: var(--color-surface-alt);
 }
 
-.table-hover > tbody > tr:hover > td {
+.table-hover>tbody>tr:hover>td {
   background-color: var(--color-primary-soft);
 }
 
@@ -974,13 +981,33 @@ textarea.form-control {
 /* ---------------------------------------------------------------------- */
 
 @media (max-width: 767.98px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .app-shell {
+    display: block;
+  }
+
+  .main-content {
+    width: 100%;
+  }
+
   .sidebar-toggle-btn {
     display: inline-flex;
+  }
+
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-width: 0;
   }
 
   .sidebar {
     display: flex;
     flex-direction: column;
+    width: min(82vw, 320px);
     position: fixed;
     top: 0;
     left: 0;
@@ -1022,8 +1049,17 @@ textarea.form-control {
     font-size: 1.02rem;
   }
 
+  .topbar-link {
+    padding: 0.4rem 0.7rem;
+  }
+
   .topbar-link span.topbar-link-text {
     display: none;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .page-body {
@@ -1034,19 +1070,19 @@ textarea.form-control {
     font-size: 1.2rem;
   }
 
-  .page-header > a.btn,
-  .page-header > button.btn {
+  .page-header>a.btn,
+  .page-header>button.btn {
     width: 100%;
     justify-content: center;
   }
 
-  .page-header > div:last-child {
+  .page-header>div:last-child {
     width: 100%;
     display: flex;
     gap: 0.5rem;
   }
 
-  .page-header > div:last-child .btn {
+  .page-header>div:last-child .btn {
     flex: 1;
     justify-content: center;
   }
@@ -1068,18 +1104,42 @@ textarea.form-control {
   }
 
   .card-body,
-  .card > .p-4 {
+  .card>.p-4 {
     padding: 1.25rem !important;
   }
 
-  .table > thead > tr > th,
-  .table > tbody > tr > td {
+  .table>thead>tr>th,
+  .table>tbody>tr>td {
     padding: 0.65rem 0.75rem;
     font-size: 0.82rem;
   }
 
+  .table-responsive {
+    overflow-x: auto;
+  }
+
   .certainty-badge {
     min-width: 0;
+    width: 100%;
+  }
+
+  .chatbot-container {
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .chatbot-window {
+    right: 12px;
+    bottom: 74px;
+    width: min(88vw, 360px);
+    height: min(68vh, 440px);
+  }
+
+  .chatbot-footer {
+    flex-direction: column;
+  }
+
+  .chatbot-footer button {
     width: 100%;
   }
 
@@ -1090,8 +1150,8 @@ textarea.form-control {
     row-gap: 0.5rem;
   }
 
-  .d-flex.justify-content-end > .btn,
-  .d-flex.justify-content-between > .btn {
+  .d-flex.justify-content-end>.btn,
+  .d-flex.justify-content-between>.btn {
     flex: 1 1 auto;
     justify-content: center;
   }
@@ -1102,6 +1162,7 @@ textarea.form-control {
     display: none !important;
   }
 }
+
 /*---------------------------------------------------------------------- */
 /* Chatbot                                                               */
 /*-----------------------------------------------------------------------*/
@@ -1139,7 +1200,8 @@ textarea.form-control {
 .chatbot-window {
   display: none;
   flex-direction: column;
-  position: fixed; /* Fixed position so dragging works across the screen */
+  position: fixed;
+  /* Fixed position so dragging works across the screen */
   bottom: 90px;
   right: 24px;
   width: 350px;
@@ -1165,7 +1227,8 @@ textarea.form-control {
   justify-content: space-between;
   align-items: center;
   font-weight: 600;
-  cursor: move; /* Indicates the window can be dragged */
+  cursor: move;
+  /* Indicates the window can be dragged */
   user-select: none;
 }
 
@@ -1254,6 +1317,8 @@ textarea.form-control {
   min-height: 350px;
   max-width: 800px;
   max-height: 800px;
-  resize: both; /* Allows resizing horizontally and vertically */
-  overflow: auto; /* Required for CSS resize to work */
+  resize: both;
+  /* Allows resizing horizontally and vertically */
+  overflow: auto;
+  /* Required for CSS resize to work */
 }

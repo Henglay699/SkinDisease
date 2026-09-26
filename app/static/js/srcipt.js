@@ -1,7 +1,45 @@
+function initializeSidebar() {
+  const sidebar = document.querySelector('.sidebar');
+  const backdrop = document.querySelector('.sidebar-backdrop');
+  const toggleBtn = document.querySelector('.sidebar-toggle-btn');
+  const closeBtn = document.querySelector('.sidebar-close-btn');
+
+  if (!sidebar || !toggleBtn) return;
+
+  const setSidebarOpen = (isOpen) => {
+    sidebar.classList.toggle('sidebar-open', isOpen);
+    toggleBtn.setAttribute('aria-expanded', String(isOpen));
+    if (backdrop) {
+      backdrop.classList.toggle('show', isOpen);
+    }
+  };
+
+  toggleBtn.addEventListener('click', () => {
+    const isOpen = sidebar.classList.contains('sidebar-open');
+    setSidebarOpen(!isOpen);
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => setSidebarOpen(false));
+  }
+
+  if (backdrop) {
+    backdrop.addEventListener('click', () => setSidebarOpen(false));
+  }
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      setSidebarOpen(false);
+    }
+  });
+}
+
 // Toggle Chat Visibility
 function toggleChat() {
   const chatWindow = document.getElementById("chatWindow");
-  chatWindow.classList.toggle("active");
+  if (chatWindow) {
+    chatWindow.classList.toggle("active");
+  }
 }
 
 function handleKeyPress(event) {
@@ -62,6 +100,8 @@ async function sendMessage() {
 
 // Draggable Window Feature (Click and hold the header to drag)
 document.addEventListener("DOMContentLoaded", () => {
+  initializeSidebar();
+
   const chatWindow = document.getElementById("chatWindow");
   
   if (!chatWindow) return;
